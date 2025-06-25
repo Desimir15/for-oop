@@ -23,6 +23,8 @@ public:
     }
 
     virtual void customCall() = 0;
+
+
 };
 
 class GovernmentBody : public PublicInstitution {
@@ -45,7 +47,7 @@ public:
     }
 
     void printInfo() const override {
-        cout << "Government Body 1: " << name << endl;
+        cout << "Government Body : " << name << endl;
         cout<< " Address: " << address << endl;
         cout << " Budget: " << budget << endl;
         cout << " Leader: " << leader << endl;
@@ -163,7 +165,7 @@ protected:
 
 public:
     MunicipalBody() : PublicInstitution(), population(0), mayor("mayor") {}
-    MunicipalBody(const string& name, const string& address, int population, const string& mayor)
+    MunicipalBody(const string name, const string address, int population, const string mayor)
         : PublicInstitution(name, address), population(population), mayor(mayor) {
     }
 
