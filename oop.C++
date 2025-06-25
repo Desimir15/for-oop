@@ -11,8 +11,8 @@ protected:
 
 public:
     virtual ~PublicInstitution() {}
-    PublicInstitution() : name("no data"), address("no data") {}
-    PublicInstitution(const string& name, const string& address = "No address")
+    PublicInstitution() : name("name"), address("address") {}
+    PublicInstitution(const string name, const string address = "address")
         : name(name), address(address) {
     }
 
@@ -31,8 +31,8 @@ protected:
     string leader;
 
 public:
-    GovernmentBody() : PublicInstitution(), budget(0.0), leader("Unknown") {}
-    GovernmentBody( string name,  string address, double budget = 10000.0,  string leader = "Unknown")
+    GovernmentBody() : PublicInstitution(), budget(0.0), leader("leader") {}
+    GovernmentBody( string name,  string address, double budget = 10000.0,  string leader = "leader")
         : PublicInstitution(name, address), budget(budget), leader(leader) {
     }
 
@@ -64,9 +64,9 @@ protected:
     string type;
 
 public:
-    Parliament() : GovernmentBody(), numberOfMembers(0), type("Unknown") {}
-    Parliament(const string& name, const string& address, double budget, const string& leader,
-        int numberOfMembers, const string& type = "National")
+    Parliament() : GovernmentBody(), numberOfMembers(0), type("no") {}
+    Parliament(const string name, const string address, double budget, const string leader,
+        int numberOfMembers, const string type = "National")
         : GovernmentBody(name, address, budget, leader), numberOfMembers(numberOfMembers), type(type) {
     }
 
@@ -97,10 +97,10 @@ class ParliamentCommittee : public Parliament {
     int committeeMemberCount;
 
 public:
-    ParliamentCommittee() : Parliament(), committeeName("Unknown Committee"), committeeMemberCount(0) {}
+    ParliamentCommittee() : Parliament(), committeeName(" Committee"), committeeMemberCount(0) {}
 
-    ParliamentCommittee(const string& name, const string& address, double budget, const string& leader,
-        int numberOfMembers, const string& committeeName, int committeeMemberCount)
+    ParliamentCommittee(const string name, const string address, double budget, const string leader,
+        int numberOfMembers, const string committeeName, int committeeMemberCount)
         : Parliament(name, address, budget, leader, numberOfMembers, "Committee"),
         committeeName(committeeName), committeeMemberCount(committeeMemberCount) {
     }
@@ -129,9 +129,9 @@ class ParliamentOffice : public Parliament {
     int staffCount;
 
 public:
-    ParliamentOffice() : Parliament(), officeLocation("Unknown Office"), staffCount(0) {}
+    ParliamentOffice() : Parliament(), officeLocation(" Office"), staffCount(0) {}
 
-    ParliamentOffice(const string& name, const string& address, double budget, const string& leader,
+    ParliamentOffice(const string name, const string address, double budget, const string leader,
         int numberOfMembers, const string& officeLocation, int staffCount)
         : Parliament(name, address, budget, leader, numberOfMembers, "Office"),
         officeLocation(officeLocation), staffCount(staffCount) {
@@ -162,7 +162,7 @@ protected:
     string mayor;
 
 public:
-    MunicipalBody() : PublicInstitution(), population(0), mayor("Unknown") {}
+    MunicipalBody() : PublicInstitution(), population(0), mayor("mayor") {}
     MunicipalBody(const string& name, const string& address, int population, const string& mayor)
         : PublicInstitution(name, address), population(population), mayor(mayor) {
     }
@@ -193,8 +193,8 @@ protected:
     string cityName;
 
 public:
-    CityCouncil() : MunicipalBody(), councilMembers(0), cityName("Unknown") {}
-    CityCouncil(const string& name, const string& address, int population, const string& mayor,
+    CityCouncil() : MunicipalBody(), councilMembers(0), cityName("cityName") {}
+    CityCouncil(const string name, const string address, int population, const string mayor,
         int councilMembers, const string& cityName)
         : MunicipalBody(name, address, population, mayor), councilMembers(councilMembers), cityName(cityName) {
     }
@@ -225,10 +225,10 @@ class CityDepartment : public CityCouncil {
     int staffCount;
 
 public:
-    CityDepartment() : CityCouncil(), departmentName("Unknown Department"), staffCount(0) {}
+    CityDepartment() : CityCouncil(), departmentName(" Department"), staffCount(0) {}
 
-    CityDepartment(const string& name, const string& address, int population, const string& mayor,
-        int councilMembers, const string& cityName, const string& departmentName, int staffCount)
+    CityDepartment(const string name, const string address, int population, const string mayor,
+        int councilMembers, const string cityName, const string departmentName, int staffCount)
         : CityCouncil(name, address, population, mayor, councilMembers, cityName),
         departmentName(departmentName), staffCount(staffCount) {
     }
@@ -255,10 +255,10 @@ class CityOffice : public CityCouncil {
     int staffCount;
 
 public:
-    CityOffice() : CityCouncil(), officeLocation("Unknown Office"), staffCount(0) {}
+    CityOffice() : CityCouncil(), officeLocation(" Office"), staffCount(0) {}
 
-    CityOffice(const string& name, const string& address, int population, const string& mayor,
-        int councilMembers, const string& cityName, const string& officeLocation, int staffCount)
+    CityOffice(const string name, const string address, int population, const string mayor,
+        int councilMembers, const string cityName, const string officeLocation, int staffCount)
         : CityCouncil(name, address, population, mayor, councilMembers, cityName),
         officeLocation(officeLocation), staffCount(staffCount) {
     }
@@ -281,30 +281,24 @@ public:
 
 
 int main() {
-    PublicInstitution* institutions[] = {
-        new GovernmentBody("Ministry of Education ", "10 Gov St", 25692, "Anna Minister"),
-        new Parliament("National Parliament", "1 Parliament Sq", 15000, "John Speaker", 300, "National"),
-        new ParliamentCommittee("Finance Committee", "1 Parliament Sq", 30000, "Emma Chair", 50, "Finance Committee", 15),
-        new ParliamentOffice("Parliament Operations Office", "2 Parliament Sq", 10000, "Michael Admin", 40, "Main Office", 20),
-        new MunicipalBody("City Municipality", "123 Main St", 10000, "Olivia Mayor"),
-        new CityCouncil("City Council", "45 Council St", 8000, "James Mayor", 25, "Springfield"),
-        new CityDepartment("Health Department", "45 Council St", 80000, "James Mayor", 25, "Springfield", "Health Dept", 30),
-        new CityOffice("City Records Office", "50 City Hall", 80000, "James Mayor", 25, "Springfield", "Records Office", 40)
+    PublicInstitution* institutions[8] = {
+    institutions[0] = new GovernmentBody("Ministry of Education ", "10 Gov St", 25692, "Anna Minister"),
+     institutions[1] = new Parliament("National Parliament", "1 Parliament Sq", 15000, "John Speaker", 300, "National"),
+     institutions[2] = new ParliamentCommittee("Finance Committee", "1 Parliament Sq", 30000, "Emma Chair", 50, "Finance Committee", 15),
+     institutions[3] = new ParliamentOffice("Parliament Operations Office", "2 Parliament Sq", 10000, "Michael Admin", 40, "Main Office", 20),
+     institutions[4] = new MunicipalBody("City Municipality", "123 Main St", 10000, "Olivia Mayor"),
+     institutions[5] = new CityCouncil("City Council", "45 Council St", 8000, "James Mayor", 25, "Springfield"),
+     institutions[6] = new CityDepartment("Health Department", "45 Council St", 80000, "James Mayor", 25, "Springfield", "Health Dept", 30),
+    institutions[7] = new CityOffice("City Records Office", "50 City Hall", 80000, "James Mayor", 25, "Springfield", "Records Office", 40)
     };
-
-    const int n = sizeof(institutions) / sizeof(institutions[0]);
-    for (int i = 0; i < n; ++i) {
-        cout << "\n--- Institution " << (i + 1) << " ---\n";
+    
+ 
+    for (int i = 0; i < 8; ++i) {
+        cout << "\n" << endl;
         institutions[i]->printInfo();
         institutions[i]->announce();
         institutions[i]->customCall();
     }
 
-
-    for (int i = 0; i < n; ++i) {
-        delete institutions[i];
-    }
-
     return 0;
 }
-
